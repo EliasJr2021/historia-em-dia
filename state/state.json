@@ -9,34 +9,19 @@
       "ig_media_id": "18003437387804221",
       "permalink": "https://www.instagram.com/p/De-wLfkHIyZ/",
       "posted_at": "2026-10-27T02:10:40+00:00"
+    },
+    {
+      "slug": "fatos-historicos-incriveis-em-03-11",
+      "wp_id": 1010,
+      "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-03-11/",
+      "date_label": "3 de novembro",
+      "ig_media_id": "17946973338359918",
+      "permalink": "https://www.instagram.com/p/DfBBu8siUw-/",
+      "posted_at": "2026-10-27T23:22:32+00:00"
     }
   ],
   "skipped": [],
-  "pending": {
-    "slug": "fatos-historicos-incriveis-em-03-11",
-    "wp_id": 1010,
-    "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-03-11/",
-    "title": "🚀 Fatos Históricos Incríveis em 03/11: Da Revolução no Brasil à Conquista do Espaço - Historia Em Dia",
-    "date_label": "3 de novembro",
-    "slides": [
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_01.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_02.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_03.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_04.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_05.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_06.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_07.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_08.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_09.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-03-11/slide_10.jpg"
-    ],
-    "caption": "📅 3 de novembro na História\n3 de novembro: Vargas assume o Governo Provisório (1930), Laika entra em órbita (1957) e o Panamá se separa da Colômbia (1903). Deslize ➡️\n\n1930 • Vargas assume o Governo Provisório\n1957 • Laika entra em órbita na Sputnik 2\n1903 • Panamá declara separação da Colômbia\n1918 • Armistício de Villa Giusti\n1839 • Começa a Primeira Guerra do Ópio\n1864 • Morre o poeta Gonçalves Dias\n2014 • Inaugurado o One World Trade Center\n+ 5 fatos no carrossel e no site\n\n📖 Texto completo no site (link na bio):\nhttps://historiaemdia.com.br/fatos-historicos-incriveis-em-03-11/?utm_source=instagram&utm_medium=carrossel&utm_campaign=diario\n\nImagem ilustrativa gerada por IA.\n\nConteúdo informativo, com finalidade histórica e educativa.\n\n#historia #3denovembro #eravargas #laika #primeiraguerramundial #canaldopanama #historiadobrasil #história",
-    "verdict": "reter",
-    "status": "publishing",
-    "issue": 6,
-    "created_at": "2026-10-27T18:29:11+00:00",
-    "creation_id": "18152224561505007"
-  },
+  "pending": null,
   "ig": {
     "token_enc": null,
     "refreshed_at": null,
