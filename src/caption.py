@@ -6,7 +6,7 @@ from . import config
 from .models import Carousel
 from .plan import Plan
 
-DEFAULT_TAGS = ["história", "hojenahistória", "curiosidadeshistóricas"]
+DEFAULT_TAGS = ["história", "históriadomundo", "curiosidadeshistóricas"]
 
 
 def utm_link(link: str) -> str:
@@ -19,6 +19,8 @@ def clean_tags(tags: list[str]) -> list[str]:
     out = []
     for t in tags + DEFAULT_TAGS:
         t = re.sub(r"[^\w]", "", t.lstrip("#").lower())
+        if "hoje" in t:   # regra do perfil: nunca usar "hoje" (a data é sempre histórica)
+            continue
         if t and t not in out:
             out.append(t)
     return ["#" + t for t in out[:8]]

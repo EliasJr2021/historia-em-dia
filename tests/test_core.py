@@ -138,3 +138,8 @@ def test_html_fallback_drops_chrome_and_starts_at_h1():
             "<main><p>Popular menu</p><h1>14 de abril na História</h1><p>Texto do artigo.</p></main></body>")
     out = _clean_text(BeautifulSoup(html, "html.parser"))
     assert "parceria" not in out and out.startswith("## 14 de abril") and "Texto do artigo" in out
+
+
+def test_hashtags_never_contain_hoje():
+    tags = caption.clean_tags(["#HojeNaHistória", "hoje na história", "Titanic"])
+    assert all("hoje" not in t for t in tags) and "#titanic" in tags
