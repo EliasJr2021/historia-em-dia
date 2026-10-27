@@ -66,7 +66,7 @@ def check_covers(pages: list[dict], n: int = 10):
             if img:
                 w, h = Image.open(io.BytesIO(img)).size
                 flag = OK if n >= 1500 else FAIL + " TEXTO CURTO"
-                print(f"{flag} {p['slug']}: capa {w}x{h}; texto {n} caracteres (fonte: {page['text_source']})")
+                print(f"{flag} {p['slug']}: capa {w}x{h}; texto {n} car. (fonte: {page['text_source']}; rest={page['rest_len']}, html={page['html_len']})")
                 good += 1
             else:
                 print(f"{FAIL} sem imagem de capa utilizável: {p['slug']}")

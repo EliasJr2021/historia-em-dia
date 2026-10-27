@@ -121,3 +121,20 @@ def test_cover_any_aspect_ratio(size, tmp_path):
     slides = render.build_slides(c, p, buf.getvalue())
     assert slides[0].size == (1080, 1350)
     slides[0].convert("RGB").save(tmp_path / f"cover_{size[0]}x{size[1]}.jpg")
+
+
+def test_text_source_prefers_rest():
+    from src.discover import choose_text
+    art = "artigo " * 800
+    chrome = "menu popular posts " * 2000
+    assert choose_text(art, art + chrome) == (art, "rest")
+    assert choose_text("curto", chrome)[1] == "html"
+
+
+def test_html_fallback_drops_chrome_and_starts_at_h1():
+    from bs4 import BeautifulSoup
+    from src.discover import _clean_text
+    html = ("<body><div class='x-popup'><h2>Quer fazer uma parceria conosco?</h2></div>"
+            "<main><p>Popular menu</p><h1>14 de abril na História</h1><p>Texto do artigo.</p></main></body>")
+    out = _clean_text(BeautifulSoup(html, "html.parser"))
+    assert "parceria" not in out and out.startswith("## 14 de abril") and "Texto do artigo" in out

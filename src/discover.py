@@ -138,8 +138,15 @@ def html_to_text(html_str: str) -> str:
     return _blocks_to_text(BeautifulSoup(html_str, "html.parser"))
 
 
+CHROME_SELECTORS = [".elementor-location-header", ".elementor-location-footer", '[class*="sidebar"]',
+                    '[class*="popup"]', '[id*="comment"]', '[class*="popular"]', '[class*="related"]']
+
+
 def _clean_text(soup: BeautifulSoup) -> str:
-    """Reserva: raspagem do HTML. Testa vários contêineres e fica com o de mais texto."""
+    """Reserva: raspagem do HTML. Remove menus/rodapé e começa no título do artigo (h1)."""
+    for sel in CHROME_SELECTORS:
+        for el in soup.select(sel):
+            el.decompose()
     best = ""
     for sel in ('[data-elementor-type="wp-post"]', ".entry-content", "article", "main", "body"):
         root = soup.select_one(sel)
@@ -148,7 +155,22 @@ def _clean_text(soup: BeautifulSoup) -> str:
         txt = _blocks_to_text(BeautifulSoup(str(root), "html.parser"))
         if len(txt) > len(best):
             best = txt
+    h1 = soup.find("h1")
+    if h1:
+        marker = "## " + h1.get_text(" ", strip=True)
+        if marker in best:
+            best = best[best.index(marker):]
     return best
+
+
+MIN_REST_CHARS = 3000
+
+
+def choose_text(rest_text: str, html_text: str) -> tuple[str, str]:
+    """O corpo vindo da API REST contém só o artigo; o HTML inclui menu, barra lateral e rodapé."""
+    if len(rest_text) >= MIN_REST_CHARS:
+        return rest_text, "rest"
+    return html_text, "html"
 
 
 def fetch_content_rest(post_id: int) -> str:
@@ -172,16 +194,17 @@ def fetch_page(link: str, post_id: int = 0) -> dict:
     soup = BeautifulSoup(r.text, "html.parser")
     og = soup.find("meta", property="og:image")
     title = soup.find("meta", property="og:title")
-    text, source = fetch_content_rest(post_id), "rest"
+    rest_text = fetch_content_rest(post_id)
     html_text = _clean_text(soup)
-    if len(html_text) > len(text):
-        text, source = html_text, "html"
+    text, source = choose_text(rest_text, html_text)
     return {
         "link": link,
         "title": (title["content"] if title and title.get("content") else (soup.title.string if soup.title else "")),
         "cover_url": og["content"] if og and og.get("content") else None,
         "text": text[:40000],
         "text_source": source,
+        "rest_len": len(rest_text),
+        "html_len": len(html_text),
     }
 
 
