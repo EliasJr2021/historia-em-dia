@@ -10,8 +10,11 @@ from bs4 import BeautifulSoup
 
 from . import config
 
-MESES = "janeiro|fevereiro|marco|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro"
-DATE_RE = re.compile(rf"(\d{{1,2}})\s*(?:º|°|o)?[\s-]+de[\s-]+({MESES})", re.I)
+MESES_NOMES = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto",
+               "setembro", "outubro", "novembro", "dezembro"]
+MESES = "|".join(MESES_NOMES + ["março"])
+DATE_RE = re.compile(rf"(?<!\d)(\d{{1,2}})\s*(?:º|°|o)?[\s-]+de[\s-]+({MESES})(?![a-z])", re.I)
+NUM_RE = re.compile(r"(?<!\d)(\d{1,2})[-/_.](\d{1,2})(?!\d)")
 
 
 def _session() -> requests.Session:
@@ -24,9 +27,26 @@ def _strip_accents(t: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFD", t) if unicodedata.category(c) != "Mn")
 
 
+def parse_date(title: str, slug: str) -> tuple[int, int] | None:
+    """Devolve (dia, mês) se título ou slug indicam uma data; senão None."""
+    slug_n = slug.replace("_", "-")
+    for text in (_strip_accents(title).lower(), _strip_accents(slug_n.replace("-", " ")).lower()):
+        m = DATE_RE.search(text)
+        if m:
+            mes = _strip_accents(m.group(2).lower())
+            idx = MESES_NOMES.index(mes) + 1
+            if 1 <= int(m.group(1)) <= 31:
+                return int(m.group(1)), idx
+    # dd-mm no slug ou no título (ex.: fatos-historicos-incriveis-em-14-12, 14/12)
+    for text in (slug_n, title):
+        m = NUM_RE.search(text)
+        if m and 1 <= int(m.group(1)) <= 31 and 1 <= int(m.group(2)) <= 12:
+            return int(m.group(1)), int(m.group(2))
+    return None
+
+
 def is_date_page(title: str, slug: str) -> bool:
-    text = _strip_accents(f"{title} {slug.replace('-', ' ')}").lower()
-    return bool(DATE_RE.search(_strip_accents(text).replace(" de ", " de ")))
+    return parse_date(title, slug) is not None
 
 
 def list_posts_rest(s: requests.Session) -> list[dict]:
@@ -93,9 +113,7 @@ def next_post(done_slugs: set[str]) -> dict | None:
     return None
 
 
-def _clean_text(soup: BeautifulSoup) -> str:
-    root = (soup.select_one('[data-elementor-type="wp-post"]') or soup.select_one("article")
-            or soup.select_one("main") or soup.body)
+def _blocks_to_text(root) -> str:
     for t in root.find_all(["script", "style", "nav", "header", "footer", "aside", "form", "noscript"]):
         t.decompose()
     lines, seen = [], set()
@@ -116,18 +134,54 @@ def _clean_text(soup: BeautifulSoup) -> str:
     return "\n".join(lines)[:40000]
 
 
-def fetch_page(link: str) -> dict:
+def html_to_text(html_str: str) -> str:
+    return _blocks_to_text(BeautifulSoup(html_str, "html.parser"))
+
+
+def _clean_text(soup: BeautifulSoup) -> str:
+    """Reserva: raspagem do HTML. Testa vários contêineres e fica com o de mais texto."""
+    best = ""
+    for sel in ('[data-elementor-type="wp-post"]', ".entry-content", "article", "main", "body"):
+        root = soup.select_one(sel)
+        if root is None:
+            continue
+        txt = _blocks_to_text(BeautifulSoup(str(root), "html.parser"))
+        if len(txt) > len(best):
+            best = txt
+    return best
+
+
+def fetch_content_rest(post_id: int) -> str:
+    """Corpo do post pela API REST (content.rendered): independente do tema/Elementor."""
+    if not post_id:
+        return ""
+    try:
+        r = _session().get(f"{config.SITE_BASE}/wp-json/wp/v2/posts/{post_id}",
+                           params={"_fields": "id,content"}, timeout=30)
+        r.raise_for_status()
+        return html_to_text(r.json()["content"]["rendered"])
+    except Exception as e:  # noqa: BLE001
+        print(f"[discover] conteúdo via REST indisponível ({e}); usando HTML.")
+        return ""
+
+
+def fetch_page(link: str, post_id: int = 0) -> dict:
     s = _session()
     r = s.get(link, timeout=30)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
     og = soup.find("meta", property="og:image")
     title = soup.find("meta", property="og:title")
+    text, source = fetch_content_rest(post_id), "rest"
+    html_text = _clean_text(soup)
+    if len(html_text) > len(text):
+        text, source = html_text, "html"
     return {
         "link": link,
         "title": (title["content"] if title and title.get("content") else (soup.title.string if soup.title else "")),
         "cover_url": og["content"] if og and og.get("content") else None,
-        "text": _clean_text(soup),
+        "text": text[:40000],
+        "text_source": source,
     }
 
 

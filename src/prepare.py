@@ -15,6 +15,7 @@ from .review import review
 from .token import get_token
 
 ROOT = Path(__file__).resolve().parent.parent
+MIN_TEXT_CHARS = 1500
 
 
 def alert(title: str, body: str) -> None:
@@ -49,7 +50,11 @@ def run() -> int:
         return 0
     print(f"[prepare] próxima página: {post['slug']}")
 
-    page = discover.fetch_page(post["link"])
+    page = discover.fetch_page(post["link"], post["id"])
+    if len(page["text"]) < MIN_TEXT_CHARS:
+        raise RuntimeError(
+            f"Texto da página insuficiente ({len(page['text'])} caracteres, fonte: {page.get('text_source')}) em "
+            f"{post['link']}. O robô não gera carrossel sem conteúdo suficiente para evitar informações inventadas.")
     cover = get_cover(post["slug"], page)
 
     carousel = extract(page)

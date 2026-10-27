@@ -25,6 +25,17 @@ def test_date_page_filter():
     assert is_date_page("x", "fatos-historicos-17-de-abril")
     assert is_date_page("1º de janeiro", "1o-de-janeiro-na-historia")
     assert not is_date_page("Sobre nós", "sobre")
+    # formatos reais vistos no site
+    assert is_date_page("x", "fatos-historicos-incriveis-em-14-12")
+    assert is_date_page("x", "fatos_historicos_incriveis_em_22_03")
+    assert is_date_page("x", "fatos-hitoricos-incriveis-em-09-01")
+    assert is_date_page("x", "3-de-abril-na-historia")
+    assert is_date_page("Fatos de 28/12", "x")
+    assert not is_date_page("Política de privacidade", "politica-de-privacidade")
+    assert not is_date_page("Top 10 de 2026", "top-10-de-2026")
+    from src.discover import parse_date
+    assert parse_date("x", "fatos-historicos-incriveis-em-14-12") == (14, 12)
+    assert parse_date("x", "10-de-marco-historia") == (10, 3)
 
 
 def test_plan_limits_and_order():
@@ -99,3 +110,14 @@ def test_validation_rejects_long_title():
     data["events"][0]["title"] = "x" * 90
     with pytest.raises(Exception):
         Carousel.model_validate(data)
+
+
+@pytest.mark.parametrize("size", [(1024, 1024), (1536, 1024), (1344, 768), (1376, 768)])
+def test_cover_any_aspect_ratio(size, tmp_path):
+    c = sample()
+    p = plan_mod.make_plan(c)
+    buf = io.BytesIO()
+    Image.new("RGB", size, (50, 70, 100)).save(buf, "JPEG")
+    slides = render.build_slides(c, p, buf.getvalue())
+    assert slides[0].size == (1080, 1350)
+    slides[0].convert("RGB").save(tmp_path / f"cover_{size[0]}x{size[1]}.jpg")

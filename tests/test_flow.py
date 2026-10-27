@@ -22,7 +22,7 @@ def _patch_common(monkeypatch, tmp_path, issues):
     monkeypatch.setattr(prepare.Instagram, "whoami", lambda self: {"username": "historia.em.diaa"})
     monkeypatch.setattr(prepare.discover, "next_post", lambda done: None if "14-de-abril" in done else
                         {"id": 7, "slug": "14-de-abril", "link": "https://site/14-de-abril/", "title": "14 de abril"})
-    monkeypatch.setattr(prepare.discover, "fetch_page", lambda link: {"link": link, "title": "t", "cover_url": "u", "text": "texto"})
+    monkeypatch.setattr(prepare.discover, "fetch_page", lambda link, pid=0: {"link": link, "title": "t", "cover_url": "u", "text": "texto " * 400, "text_source": "rest"})
     monkeypatch.setattr(prepare.discover, "download_image", lambda u: _cover())
     monkeypatch.setattr(prepare, "extract", lambda page, feedback=None: sample())
     monkeypatch.setattr(prepare, "review", lambda p, c, cv: Review(verdict="ok", reasons=["fiel à página"], fixes=[], image_ok=True, image_flags=[]))
@@ -58,7 +58,7 @@ def test_approve_publishes_once(monkeypatch, tmp_path):
     monkeypatch.setattr(publish.Instagram, "quota", lambda self: {"data": []})
     monkeypatch.setattr(publish.Instagram, "recent_media", lambda self, limit=10: [])
 
-    def create(self, urls, caption):
+    def create(self, urls, caption, ai_generated=False):
         calls["create"] += 1
         return "cid1"
 
@@ -108,3 +108,14 @@ def test_held_when_review_says_reter(monkeypatch, tmp_path):
     prepare.run()
     assert "retido" in issues[0][2]
     assert st.load()["pending"]["verdict"] == "reter"
+
+
+def test_short_text_is_blocked(monkeypatch, tmp_path):
+    import pytest
+    issues = []
+    _patch_common(monkeypatch, tmp_path, issues)
+    monkeypatch.setattr(prepare.discover, "fetch_page", lambda link, pid=0: {"link": link, "title": "t", "cover_url": "u", "text": "x" * 652, "text_source": "html"})
+    monkeypatch.setattr(prepare.github_api, "create_issue", lambda *a, **k: 1)
+    with pytest.raises(RuntimeError, match="insuficiente"):
+        prepare.run()
+    assert st.load()["pending"] is None

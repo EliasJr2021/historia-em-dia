@@ -35,18 +35,22 @@ refresh-token.yml (semanal) renova o token do Instagram
 1. https://console.anthropic.com → *API keys* → criar chave. Adicione crédito pré-pago e configure o limite de gasto.
 2. Guarde no GitHub como segredo **`ANTHROPIC_API_KEY`**.
 
-### 3. Instagram (API do Instagram com Instagram Login — não precisa de Página do Facebook)
-Os nomes dos menus da Meta mudam com frequência; se algo estiver diferente, siga o equivalente.
-1. Conta **Profissional** (já feito). O perfil deve estar **público**.
-2. Entre em https://developers.facebook.com com uma conta do Facebook e registre-se como desenvolvedor.
-3. **Meus apps › Criar app** → tipo/caso de uso para negócios (“Outro”/“Business”) → nome, ex.: *Historia em Dia Bot*.
-4. No painel do app, adicione o produto **Instagram** › **API setup with Instagram login**.
-5. Confirme as permissões `instagram_business_basic` e `instagram_business_content_publish`.
-6. *App roles › Roles › Add People › Instagram Testers*: adicione **@historia.em.diaa**. Depois, no app do Instagram: *Configurações › Apps e sites › Convites de testador* → **aceitar**.
-7. De volta a *API setup with Instagram login*: **Add account / Generate token** para @historia.em.diaa, autorize e copie:
-   - o **token de acesso** → segredo **`IG_TOKEN_INICIAL`**;
-   - o **ID da conta do Instagram** → segredo **`IG_USER_ID`**.
-8. Para o app publicar só na **sua** conta, o modo de desenvolvimento deve bastar, sem App Review. Se a Meta exigir revisão, o teste da Fase 0 mostrará o erro.
+### 3. Instagram — app na Meta (API do Instagram com Instagram Login; não precisa de Página do Facebook)
+Passo a passo conferido na documentação atual da Meta (out/2026). Os nomes dos menus podem aparecer em português.
+1. Conta **Profissional** (já feito) e **pública**, pois a Meta exige conta pública para gerar o token.
+2. Acesse https://developers.facebook.com, entre com sua conta do Facebook e clique em **Get Started / Começar**. Aceite os Termos, confirme o código enviado ao seu telefone e e-mail e escolha a ocupação.
+3. Abra https://developers.facebook.com/apps/creation/ e siga o assistente:
+   - **Detalhes do app:** nome (ex.: *Historia em Dia Bot*) e e-mail de contato.
+   - **Casos de uso:** selecione **Manage messaging & content on Instagram** (*Gerenciar mensagens e conteúdo no Instagram*).
+   - **Empresa (Business):** escolha **I don't want to connect a business portfolio yet** (*Não quero conectar um portfólio de negócios agora*). Para uma conta própria isso não é necessário.
+   - **Requisitos** › Next › **Overview** › **Go to dashboard**.
+4. No painel, abra **Casos de uso (Use cases) › Customize** do caso de uso do Instagram e escolha **API setup with Instagram Login** (*Configuração da API com login do Instagram*). Não use a opção “com login do Facebook”.
+5. **Permissões:** clique em **Add all required permissions**. Isso adiciona `instagram_business_basic` (e a permissão de mensagens, que é obrigatória neste caso de uso e não precisa ser usada). Depois abra **Permissions and features** no menu lateral e adicione **`instagram_business_content_publish`**, que é a que permite publicar. Faça isso **antes** de gerar o token.
+6. Na seção **Generate access tokens**, clique em **Add account**, depois **Continue**, entre com @historia.em.diaa na janela que abrir e clique em **Save** e **Got it**. Você pode ver ou remover contas depois em *App roles › Roles*. Se aparecer um convite de testador pendente, aceite no app do Instagram em *Configurações › Apps e sites*.
+7. Ainda em **Generate access tokens**, clique em **Generate token** ao lado da conta e copie o token → segredo **`IG_TOKEN_INICIAL`**. Se você gerou o token antes do passo 5, gere de novo.
+   - O **ID da conta** é opcional: se não o encontrar, deixe o segredo `IG_USER_ID` em branco (o robô usa `me`). O teste da Fase 0 com “instagram” mostra o `user_id`, e você pode guardá-lo depois.
+   - A documentação não informa a duração do token gerado no painel. Se ele parar de funcionar em poucas horas, troque por um de 60 dias com `scripts/trocar_token.py` (usa o *Instagram app secret*, em *API setup with Instagram login › Set up Instagram business login › Business login settings*, que você nunca deve colar em chats).
+8. **App Review não é necessário** para publicar na sua própria conta. A Meta exige revisão só quando o app acessa contas que você não possui nem administra. Para contas próprias adicionadas ao app, o Standard Access basta. Você **não** precisa configurar webhooks, URL de redirecionamento nem publicar o app.
 
 ### 4. Chave que protege o token no repositório
 ```bash
@@ -60,9 +64,9 @@ Guarde a saída como segredo **`STATE_KEY`**. O token renovado é salvo cifrado 
 | `APPROVAL_MODE` | `manual` | `auto` publica sem aprovação quando a revisão está ok |
 | `CLAUDE_MODEL` | `claude-sonnet-5-5` | `claude-haiku-5-5` reduz o custo |
 | `ORDER` | `chronological` | ou `page` (ordem da página) |
-| `MAX_SLIDES` | `10` | de 4 a 10 |
-| `AI_IMAGE_NOTICE` | `false` | `true` acrescenta “Imagem ilustrativa gerada por IA.” |
-| `MEDIA_BASE_URL` | Pages do repositório | alternativa: `https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media` |
+| `MAX_SLIDES` | `10` | de 4 a 10 (a API já aceita até 20; 10 é uma escolha editorial) |
+| `AI_IMAGE_NOTICE` | `false` | `true` acrescenta o aviso na legenda e no slide final e marca o post como gerado por IA (`is_ai_generated`) |
+| `MEDIA_BASE_URL` | Pages do repositório | com `https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media` não é preciso configurar o Pages (testado na Fase 0) |
 | `SITE_BASE` | `https://historiaemdia.com.br` | |
 
 ### 6. Fase 0 — testes de viabilidade
@@ -89,6 +93,11 @@ Se a API REST do site falhar (plugin de segurança), o robô usa o sitemap. Se a
 - Textos: só o que está na página, tom acadêmico em temas sensíveis (`prompts/sistema.md`).
 - Legenda: gancho, lista de fatos, link da página com UTM, aviso educativo e hashtags. O link **não é clicável** na legenda do Instagram; mantenha também o site no link da bio.
 - Sem imagem de capa: capa tipográfica. Para trocar uma imagem, coloque `overrides/<slug>.jpg`.
+
+## Verificações automáticas
+- O robô **não gera carrossel** se o texto extraído da página tiver menos de 1.500 caracteres (abre um Issue `falha`), para nunca resumir conteúdo que não leu.
+- O texto vem da API REST do site (`content.rendered`); a raspagem do HTML é só reserva.
+- Capas em qualquer proporção (1:1, 3:2, 16:9) entram inteiras, sem recorte.
 
 ## Operação e problemas comuns
 | Sintoma | Causa provável |

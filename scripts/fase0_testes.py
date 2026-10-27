@@ -36,6 +36,18 @@ def check_site() -> list[dict]:
             print(f"{FAIL} Sitemap também falhou: {e2}")
     pages = [p for p in posts if discover.is_date_page(p["title"], p["slug"])]
     print(f"   Páginas de data reconhecidas: {len(pages)} de {len(posts)}")
+    ignored = [p for p in posts if not discover.is_date_page(p["title"], p["slug"])]
+    if ignored:
+        print(f"   NÃO reconhecidas como data ({len(ignored)}) — confira se alguma é página de data:")
+        for p in ignored[:70]:
+            print(f"     - {p['slug']}  |  {p['title'][:70]}")
+    dates = {}
+    for p in pages:
+        dates.setdefault(discover.parse_date(p["title"], p["slug"]), []).append(p["slug"])
+    dups = {k: v for k, v in dates.items() if len(v) > 1}
+    print(f"   Datas distintas: {len(dates)}; datas com mais de uma página: {len(dups)}")
+    for k, v in list(dups.items())[:10]:
+        print(f"     dia/mês {k}: {v}")
     for p in pages[:3]:
         print(f"   mais antigas: {p['date'][:10]}  {p['slug']}")
     for p in pages[-3:]:
@@ -48,17 +60,23 @@ def check_covers(pages: list[dict], n: int = 10):
     good = 0
     for p in sample:
         try:
-            page = discover.fetch_page(p["link"])
+            page = discover.fetch_page(p["link"], p["id"])
             img = discover.download_image(page["cover_url"]) if page["cover_url"] else None
+            n = len(page["text"])
             if img:
                 w, h = Image.open(io.BytesIO(img)).size
-                print(f"{OK} capa {p['slug']}: {w}x{h}; texto {len(page['text'])} caracteres")
+                flag = OK if n >= 1500 else FAIL + " TEXTO CURTO"
+                print(f"{flag} {p['slug']}: capa {w}x{h}; texto {n} caracteres (fonte: {page['text_source']})")
                 good += 1
             else:
                 print(f"{FAIL} sem imagem de capa utilizável: {p['slug']}")
         except Exception as e:  # noqa: BLE001
             print(f"{FAIL} {p['slug']}: {e}")
     print(f"   Capas utilizáveis: {good}/{len(sample)}")
+    if sample:
+        first = discover.fetch_page(sample[0]["link"], sample[0]["id"])
+        print("   --- prévia do texto extraído (primeiros 500 caracteres) ---")
+        print("   " + first["text"][:500].replace("\n", "\n   "))
 
 
 def check_media():

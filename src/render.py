@@ -113,15 +113,17 @@ def slide_cover(c: Carousel, plan: Plan, cover: Image.Image | None) -> Image.Ima
     y += 90
 
     if cover is not None:
-        iw = W - 2 * M
-        ih = int(iw * cover.size[1] / cover.size[0])
-        ih = min(ih, 640)
-        photo = ImageOps.fit(cover.convert("RGB"), (iw, ih), Image.LANCZOS)
-        photo = rounded(photo, 28)
         py = max(y + 40, 400)
-        im.paste(photo, (M, py), photo)
+        max_w = W - 2 * M
+        max_h = max(380, min(640, H - 190 - 190 - 44 - py))   # reserva espaço para o gancho e o rodapé
+        cw_, ch_ = cover.size
+        scale = min(max_w / cw_, max_h / ch_)
+        iw, ih = int(cw_ * scale), int(ch_ * scale)           # sem recorte: 1:1, 3:2 ou 16:9
+        photo = rounded(cover.convert("RGB").resize((iw, ih), Image.LANCZOS), 28)
+        px = (W - iw) // 2
+        im.paste(photo, (px, py), photo)
         d = ImageDraw.Draw(im)
-        d.rounded_rectangle([M, py, M + iw, py + ih], radius=28, outline=GOLD, width=3)
+        d.rounded_rectangle([px, py, px + iw, py + ih], radius=28, outline=GOLD, width=3)
         y = py + ih + 44
     else:
         y += 40
