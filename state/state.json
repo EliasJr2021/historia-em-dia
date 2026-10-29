@@ -30,7 +30,30 @@
     }
   ],
   "skipped": [],
-  "pending": null,
+  "pending": {
+    "slug": "fatos-historicos-incriveis-em-05-11-2",
+    "wp_id": 1051,
+    "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-05-11-2/",
+    "title": "💣 Fatos Históricos Incríveis em 05/11: De Conspirações Reais a Tragédias Ambientais - Historia Em Dia",
+    "date_label": "5 de novembro",
+    "slides": [
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_01.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_02.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_03.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_04.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_05.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_06.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_07.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_08.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_09.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-05-11-2/slide_10.jpg"
+    ],
+    "caption": "📅 5 de novembro na História\n5 de novembro: Conspiração da Pólvora (1605), rompimento da barragem em Mariana (2015) e inauguração de Itaipu (1982). Deslize ➡️\n\n1605 • Conspiração da Pólvora na Inglaterra\n1827 • Nasce Deodoro da Fonseca\n1849 • Nasce Rui Barbosa, o \"Águia de Haia\"\n1872 • Nasce o sanitarista Oswaldo Cruz\n1940 • Roosevelt eleito para um terceiro mandato\n1982 • Inauguração da Usina de Itaipu\n2015 • Rompimento da barragem de Fundão, em Mariana\n+ 4 fatos no carrossel e no site\n\n📖 Texto completo no site (link na bio):\nhttps://historiaemdia.com.br/fatos-historicos-incriveis-em-05-11-2/?utm_source=instagram&utm_medium=carrossel&utm_campaign=diario\n\nImagem ilustrativa gerada por IA.\n\nConteúdo informativo, com finalidade histórica e educativa.\n\n#historiaemdia #5denovembro #conspiracaodapolvora #desastredemariana #itaipu #historiadobrasil #guyfawkes #história",
+    "verdict": "reter",
+    "status": "awaiting",
+    "issue": 8,
+    "created_at": "2026-10-29T18:43:45+00:00"
+  },
   "ig": {
     "token_enc": null,
     "refreshed_at": null,
