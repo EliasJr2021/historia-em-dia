@@ -18,34 +18,19 @@
       "ig_media_id": "17946973338359918",
       "permalink": "https://www.instagram.com/p/DfBBu8siUw-/",
       "posted_at": "2026-10-27T23:22:32+00:00"
+    },
+    {
+      "slug": "fatos-historicos-incriveis-em-04-11",
+      "wp_id": 1013,
+      "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-04-11/",
+      "date_label": "4 de novembro",
+      "ig_media_id": "17991959513860059",
+      "permalink": "https://www.instagram.com/p/DfDsVmfGdGG/",
+      "posted_at": "2026-10-29T00:13:21+00:00"
     }
   ],
   "skipped": [],
-  "pending": {
-    "slug": "fatos-historicos-incriveis-em-04-11",
-    "wp_id": 1013,
-    "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-04-11/",
-    "title": "🌟 Fatos Históricos Incríveis em 04/11: Da Descoberta de Tutancâmon ao Fim da Ditadura - Historia Em Dia",
-    "date_label": "4 de novembro",
-    "slides": [
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_01.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_02.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_03.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_04.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_05.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_06.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_07.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_08.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_09.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-04-11/slide_10.jpg"
-    ],
-    "caption": "📅 4 de novembro na História\nEm 4 de novembro: a tumba de Tutancâmon (1922), a eleição de Obama (2008) e a morte de Rachel de Queiroz (2003). Deslize ➡️\n\n1922 • Descoberta a tumba de Tutancâmon\n1869 • Publicado o primeiro número da revista Nature\n1969 • Morte de Carlos Marighella\n2003 • Morre a escritora Rachel de Queiroz\n2008 • Barack Obama é eleito presidente dos EUA\n1995 • Assassinato de Yitzhak Rabin\n1970 • Salvador Allende assume a presidência do Chile\n+ 5 fatos no carrossel e no site\n\n📖 Texto completo no site (link na bio):\nhttps://historiaemdia.com.br/fatos-historicos-incriveis-em-04-11/?utm_source=instagram&utm_medium=carrossel&utm_campaign=diario\n\nImagem ilustrativa gerada por IA.\n\nConteúdo informativo, com finalidade histórica e educativa.\n\n#historia #4denovembro #tutancamon #barackobama #racheldequeiroz #unesco #historiadobrasil #história",
-    "verdict": "reter",
-    "status": "publishing",
-    "issue": 7,
-    "created_at": "2026-10-28T18:34:43+00:00",
-    "creation_id": "18152369590505007"
-  },
+  "pending": null,
   "ig": {
     "token_enc": null,
     "refreshed_at": null,
