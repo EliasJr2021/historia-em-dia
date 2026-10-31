@@ -45,34 +45,19 @@
       "ig_media_id": "18464180632191219",
       "permalink": "https://www.instagram.com/p/DfIgYU1gdoE/",
       "posted_at": "2026-10-30T21:05:06+00:00"
+    },
+    {
+      "slug": "fatos-historicos-incriveis-em-07-11",
+      "wp_id": 1097,
+      "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-07-11/",
+      "date_label": "7 de novembro",
+      "ig_media_id": "17940320307393051",
+      "permalink": "https://www.instagram.com/p/DfLAtdCmOxL/",
+      "posted_at": "2026-10-31T20:26:01+00:00"
     }
   ],
   "skipped": [],
-  "pending": {
-    "slug": "fatos-historicos-incriveis-em-07-11",
-    "wp_id": 1097,
-    "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-07-11/",
-    "title": "☭ Fatos Históricos Incríveis em 07/11: Da Revolução Bolchevique ao Legado de Cecília Meireles - Historia Em Dia",
-    "date_label": "7 de novembro",
-    "slides": [
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_01.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_02.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_03.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_04.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_05.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_06.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_07.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_08.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_09.jpg",
-      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-07-11/slide_10.jpg"
-    ],
-    "caption": "📅 7 de novembro na História\nRevolução Bolchevique em 1917, Sabinada em 1837 e o colapso da ponte de Tacoma Narrows em 1940 marcam este dia histórico. Deslize ➡️\n\n1917 • Revolução Bolchevique toma o Palácio de Inverno\n1917 • Rússia sai da Primeira Guerra e surge a União Soviética\n1837 • Eclode a Sabinada, em Salvador\n1968 • Inaugurada a nova sede do MASP\n1825 • Fundação do Diário de Pernambuco\n1901 • Nasce Cecília Meireles\n1903 • Nasce Ary Barroso, autor de \"Aquarela do Brasil\"\n+ 5 fatos no carrossel e no site\n\n📖 Texto completo no site (link na bio):\nhttps://historiaemdia.com.br/fatos-historicos-incriveis-em-07-11/?utm_source=instagram&utm_medium=carrossel&utm_campaign=diario\n\nImagem ilustrativa gerada por IA.\n\nConteúdo informativo, com finalidade histórica e educativa.\n\n#historiaemdia #7denovembro #revolucaorusa #historiadobrasil #ceciliameireles #arybarroso #masp #efemerides",
-    "verdict": "reter",
-    "status": "publishing",
-    "issue": 10,
-    "created_at": "2026-10-31T17:26:11+00:00",
-    "creation_id": "18152722921505007"
-  },
+  "pending": null,
   "ig": {
     "token_enc": null,
     "refreshed_at": null,
