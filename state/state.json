@@ -57,7 +57,30 @@
     }
   ],
   "skipped": [],
-  "pending": null,
+  "pending": {
+    "slug": "fatos-historicos-incriveis-em-08-11",
+    "wp_id": 1106,
+    "link": "https://historiaemdia.com.br/fatos-historicos-incriveis-em-08-11/",
+    "title": "🔬 Fatos Históricos Incríveis em 08/11: Do Raio X à Queda do Império Na..sta - Historia Em Dia",
+    "date_label": "8 de novembro",
+    "slides": [
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_01.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_02.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_03.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_04.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_05.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_06.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_07.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_08.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_09.jpg",
+      "https://raw.githubusercontent.com/EliasJr2021/historia-em-dia/media/fatos-historicos-incriveis-em-08-11/slide_10.jpg"
+    ],
+    "caption": "📅 8 de novembro na História\nDia histórico de 8 de novembro: descoberta dos Raios X (1895), Putsch da Cervejaria (1923) e Operação Tocha (1942). Deslize ➡️\n\n1895 • Röntgen descobre os Raios X\n1934 • Morre o cientista Carlos Chagas\n1799 • Execução de líderes da Conjuração Baiana\n1960 • JFK é eleito presidente dos EUA\n1923 • Putsch da Cervejaria, em Munique\n1942 • Operação Tocha no Norte da África\n1793 • Louvre abre ao público como museu\n+ 3 fatos no carrossel e no site\n\n📖 Texto completo no site (link na bio):\nhttps://historiaemdia.com.br/fatos-historicos-incriveis-em-08-11/?utm_source=instagram&utm_medium=carrossel&utm_campaign=diario\n\nImagem ilustrativa gerada por IA.\n\nConteúdo informativo, com finalidade histórica e educativa.\n\n#historia #8denovembro #diadaradiologia #raiosx #carloschagas #segundaguerramundial #historiadobrasil #curiosidadeshistoricas",
+    "verdict": "reter",
+    "status": "awaiting",
+    "issue": 11,
+    "created_at": "2026-11-01T18:11:35+00:00"
+  },
   "ig": {
     "token_enc": null,
     "refreshed_at": null,
