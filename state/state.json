@@ -68,8 +68,8 @@
   "skipped": [],
   "pending": null,
   "ig": {
-    "token_enc": null,
-    "refreshed_at": null,
-    "expires_at": null
+    "token_enc": "gAAAAABq6KnvyT6cGXe7eWKu5_s25Mqkqu8ESQGTEcEFUxgKnaTax7iQwqDVPCkNggGqOOW2nAx5cIA89H71hF3lTJUaZY1dksQOAN5y3wHF7313EoD6pCs79qFhANbx8yqpWskcPdp_cxGO8W7meo6IHcXhudzvxUlyia3qQL-AjJ_oMrS51d1sMEnIAiEFKoc_r_b_EsbhXFzMfaII-3X6qeISMdsNaCjzLk5GX6Kd25qj60qYK1gJAIH8RtwRgBZFKf36us7INITi3yfGxlnZ7Y73cx9uCw==",
+    "refreshed_at": "2026-11-02T15:19:11+00:00",
+    "expires_at": "2027-01-01T15:19:10+00:00"
   }
 }
